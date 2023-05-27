@@ -1,0 +1,2 @@
+insert into ob_employee (age,birth_date,creation_date,email,first_name,last_name,married,salary) values (20,'1988-12-12','1988-12-12 18:18','empleado1@employee.com','Anita','Laprida',1,50000.00);
+insert into ob_employee (first_name,last_name,email,age,birth_date,salary,married,creation_date) values ('Debora','Meltrozo','empleado0@employee.com',22,'1988-12-12',80000.00,1,'1988-12-12 20:18');
