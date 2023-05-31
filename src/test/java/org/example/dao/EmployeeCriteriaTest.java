@@ -25,4 +25,28 @@ public class EmployeeCriteriaTest {
 
         System.out.println(employees);
     }
+
+
+    @Test
+    void findByIdCriteria() {
+
+        Employee employee = dao.findByIdCriteria(2L);
+
+        System.out.println(employee);
+    }
+
+    @Test
+    void findByFirstNameCriteria() {
+
+        List<Employee> employee = dao.findByFirstNameCriteria("e");
+
+        System.out.println(employee);
+    }
+    @Test
+    void findByLastNameCriteria() {
+
+        List<Employee> employee = dao.findByLastNameCriteria("la");
+
+        System.out.println(employee);
+    }
 }

@@ -28,6 +28,13 @@ public interface EmployeeDAO {
     Employee findById(Long Id);
 
     /**
+     * Busca empleado por ID by Criteria.
+     * @param Id
+     * @return Employee by ID Criteria.
+     */
+    Employee findByIdCriteria(Long id);
+
+    /**
      * Busca todos los empleados por nombre.
      * @param firstName
      * @return Employee List by Firs tName.
@@ -35,11 +42,26 @@ public interface EmployeeDAO {
     List<Employee> findByFirstName(String firstName);
 
     /**
+     * Busca todos los empleados por nombre by Criteria.
+     * @param firstName
+     * @return Employee List by First Name bby Criteria.
+     */
+    List<Employee> findByFirstNameCriteria(String firstName);
+
+
+    /**
      * Busca todos los empleados por apellido.
      * @param lastName
      * @return Employee List by Last Name.
      */
     List<Employee> findByLastName(String lastName);
+
+    /**
+     * Busca todos los empleados por apellido by Criteria.
+     * @param lastName
+     * @return Employee List by Last Name by Criteria.
+     */
+    List<Employee> findByLastNameCriteria(String lastName);
 
     /**
      * Busca empleado por email.

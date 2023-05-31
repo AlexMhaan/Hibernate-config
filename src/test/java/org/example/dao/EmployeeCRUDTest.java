@@ -34,6 +34,8 @@ class EmployeeCRUDTest {
 
     @Test
     void findByFirstName() {
+        List<Employee> employees = dao.findByFirstName('jua');
+        System.out.println(employees);
 
     }
 
