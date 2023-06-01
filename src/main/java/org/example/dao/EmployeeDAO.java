@@ -29,7 +29,7 @@ public interface EmployeeDAO {
 
     /**
      * Busca empleado por ID by Criteria.
-     * @param Id
+     * @param id
      * @return Employee by ID Criteria.
      */
     Employee findByIdCriteria(Long id);

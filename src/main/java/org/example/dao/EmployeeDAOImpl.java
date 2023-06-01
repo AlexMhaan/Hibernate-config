@@ -71,11 +71,11 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     public List<Employee> findByFirstName(String firstName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 //        Employee employee = session.find(Employee.class, id);
-//        Query<Employee> query = session.createQuery( "FROM employee",Employee.class);
-//        query.
-//        List<Employee> employees = query.list();
-//        session.close();
-        return null;
+        Query<Employee> query = session.createQuery( "FROM Employee WHERE firstName LIKE %" + firstName + "%",Employee.class);
+
+        List<Employee> employees = query.list();
+        session.close();
+        return employees;
 
     }
 

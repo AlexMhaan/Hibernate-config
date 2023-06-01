@@ -25,16 +25,14 @@ class EmployeeCRUDTest {
 
     @Test
     void findById() {
-        Employee employee1 = dao.findById(1L);
-        Employee employee2 = dao.findById(2L);
-        Employee employee3 = dao.findById(4L);
-
+        Employee employee = dao.findById(2L);
+        System.out.println(employee);
 
     }
 
     @Test
     void findByFirstName() {
-        List<Employee> employees = dao.findByFirstName('jua');
+        List<Employee> employees = dao.findByFirstName("asd");
         System.out.println(employees);
 
     }
