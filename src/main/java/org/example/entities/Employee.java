@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="ob_employee")
 public class Employee implements Serializable {
 
     @Id

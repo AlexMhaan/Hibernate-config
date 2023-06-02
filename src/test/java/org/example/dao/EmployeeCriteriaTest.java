@@ -4,8 +4,6 @@ import org.example.entities.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class EmployeeCriteriaTest {
@@ -20,33 +18,25 @@ public class EmployeeCriteriaTest {
 
     @Test
     void findAllCriteria() {
-
         List<Employee> employees = dao.findAllCriteria();
-
         System.out.println(employees);
     }
 
 
     @Test
     void findByIdCriteria() {
-
         Employee employee = dao.findByIdCriteria(2L);
-
         System.out.println(employee);
     }
 
     @Test
     void findByFirstNameCriteria() {
-
         List<Employee> employee = dao.findByFirstNameCriteria("e");
-
         System.out.println(employee);
     }
     @Test
     void findByLastNameCriteria() {
-
         List<Employee> employee = dao.findByLastNameCriteria("la");
-
         System.out.println(employee);
     }
 }

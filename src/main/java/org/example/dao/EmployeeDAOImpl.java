@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.example.entities.Employee;
 import org.example.util.HibernateUtil;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -70,10 +71,11 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     @Override
     public List<Employee> findByFirstName(String firstName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-//        Employee employee = session.find(Employee.class, id);
-        Query<Employee> query = session.createQuery( "FROM Employee WHERE firstName LIKE %" + firstName + "%",Employee.class);
+        String query = "from Employee where firstName like :firstName";
+        List<Employee> employees = session.createQuery(query, Employee.class)
+                .setParameter(("firstName"), "%" + firstName + "%") // Set the parameter value
+                .list();
 
-        List<Employee> employees = query.list();
         session.close();
         return employees;
 

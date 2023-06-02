@@ -32,7 +32,7 @@ class EmployeeCRUDTest {
 
     @Test
     void findByFirstName() {
-        List<Employee> employees = dao.findByFirstName("asd");
+        List<Employee> employees = dao.findByFirstName("ani");
         System.out.println(employees);
 
     }
@@ -47,14 +47,9 @@ class EmployeeCRUDTest {
 
     @Test
     void findByAge() {
-
-        List<Employee> employe20 = dao.findByAge(20);
-        List<Employee> employe22 = dao.findByAge(22);
-        List<Employee> employe44 = dao.findByAge(44);
-
+        List<Employee> employe = dao.findByAge(20);
 
     }
-
     @Test
     void testFindByAge() {
     }
@@ -82,4 +77,5 @@ class EmployeeCRUDTest {
         boolean result = dao.deleteById(1L);
         System.out.println(result);
     }
+
 }
