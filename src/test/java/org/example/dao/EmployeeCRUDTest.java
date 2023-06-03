@@ -27,35 +27,30 @@ class EmployeeCRUDTest {
     void findById() {
         Employee employee = dao.findById(2L);
         System.out.println(employee);
-
     }
 
     @Test
     void findByFirstName() {
         List<Employee> employees = dao.findByFirstName("ani");
         System.out.println(employees);
-
     }
 
     @Test
     void findByLastName() {
+        List<Employee> employees = dao.findByLastName("ap");
+        System.out.println(employees);
     }
 
     @Test
     void findByEmail() {
+        Employee employee = dao.findByEmail("empleado2@employee.com");
+        System.out.println(employee);
     }
 
     @Test
     void findByAge() {
-        List<Employee> employe = dao.findByAge(20);
-
-    }
-    @Test
-    void testFindByAge() {
-    }
-
-    @Test
-    void testFindByAge1() {
+        List<Employee> employee = dao.findByAge(35);
+        System.out.println(employee);
     }
 
     @Test

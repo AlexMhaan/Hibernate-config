@@ -39,4 +39,16 @@ public class EmployeeCriteriaTest {
         List<Employee> employee = dao.findByLastNameCriteria("la");
         System.out.println(employee);
     }
+
+    @Test
+    void findByEmailCriteria() {
+        Employee employee = dao.findByEmailCriteria("empleado2@employee.com");
+        System.out.println(employee);
+    }
+    @Test
+    void findByAgeCriteria() {
+        List<Employee> employee = dao.findByAgeCriteria(35);
+        System.out.println(employee);
+    }
+
 }

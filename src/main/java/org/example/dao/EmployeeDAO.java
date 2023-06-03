@@ -71,6 +71,13 @@ public interface EmployeeDAO {
     Employee findByEmail(String email);
 
     /**
+     * Busca empleado por email by criteria.
+     * @param email
+     * @return Employee Email by criteria.
+     */
+    Employee findByEmailCriteria(String email);
+
+    /**
      * Busca todos los empleados por edad.
      * @param age
      * @return Employee List by Age.
@@ -78,18 +85,39 @@ public interface EmployeeDAO {
     List<Employee> findByAge(Integer age);
 
     /**
+     * Busca todos los empleados por edad by Criteria.
+     * @param age
+     * @return Employee List by Age by Criteria.
+     */
+    List<Employee> findByAgeCriteria(Integer age);
+
+    /**
      * Busca todos los empleados por salario.
      * @param salary
      * @return Employee List by Salary.
      */
-    List<Employee> findByAge(Double salary);
+    List<Employee> findBySalary(Double salary);
+
+    /**
+     * Busca todos los empleados por salario by Criteria.
+     * @param salary
+     * @return Employee List by Salary by Criteria.
+     */
+    List<Employee> findBySalaryCriteria(Double salary);
 
     /**
      * Busca todos los empleados por estado civil.
      * @param married
      * @return Employee List by Married(0/1).
      */
-    List<Employee> findByAge(Boolean married);
+    List<Employee> findByMarriage(Boolean married);
+
+    /**
+     * Busca todos los empleados por estado civil by Criteria.
+     * @param married
+     * @return Employee List by Married(0/1) by Criteria.
+     */
+    List<Employee> findByMarriageCriteria(Boolean married);
 
 
     /***
