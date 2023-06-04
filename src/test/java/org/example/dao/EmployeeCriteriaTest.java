@@ -15,13 +15,11 @@ public class EmployeeCriteriaTest {
         dao = new EmployeeDAOImpl();
     }
 
-
     @Test
     void findAllCriteria() {
         List<Employee> employees = dao.findAllCriteria();
         System.out.println(employees);
     }
-
 
     @Test
     void findByIdCriteria() {
@@ -34,6 +32,7 @@ public class EmployeeCriteriaTest {
         List<Employee> employee = dao.findByFirstNameCriteria("e");
         System.out.println(employee);
     }
+
     @Test
     void findByLastNameCriteria() {
         List<Employee> employee = dao.findByLastNameCriteria("la");
@@ -45,10 +44,24 @@ public class EmployeeCriteriaTest {
         Employee employee = dao.findByEmailCriteria("empleado2@employee.com");
         System.out.println(employee);
     }
+
     @Test
     void findByAgeCriteria() {
         List<Employee> employee = dao.findByAgeCriteria(35);
         System.out.println(employee);
     }
+
+    @Test
+    void findByAgeGTCriteria() {
+        List<Employee> employee = dao.findByAgeGTCriteria(36);
+        System.out.println(employee);
+    }
+
+    @Test
+    void findByBTSalaryCriteria() {
+        List<Employee> employee = dao.findByBTSalaryCriteria(55000.00, 88000.00);
+        System.out.println(employee);
+    }
+
 
 }

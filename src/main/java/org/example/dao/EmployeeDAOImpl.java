@@ -181,13 +181,58 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    public List<Employee> findBySalary(Double salary) {
-        return null;
+    public List<Employee> findByAgeGT(Integer age) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Employee> query = session.createQuery("FROM Employee WHERE age > :age", Employee.class);
+        query.setParameter("age", age);
+        List<Employee> employees = query.list();
+
+        session.close();
+        return employees;
     }
 
     @Override
-    public List<Employee> findBySalaryCriteria(Double salary) {
-        return null;
+    public List<Employee> findByAgeGTCriteria(Integer age) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = builder.createQuery(Employee.class);
+
+        Root<Employee> root = criteria.from(Employee.class);
+        Predicate filter = builder.gt(root.get("age"), age);
+        criteria.select(root).where(filter);
+        List<Employee> employees = session.createQuery(criteria).list();
+
+        session.close();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> findByBTSalary(Double min, Double max) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Employee> query = session.createQuery("FROM Employee WHERE salary BETWEEN :min AND :max", Employee.class);
+        query.setParameter("min", min).setParameter("max", max);
+        List<Employee> employees = query.list();
+
+        session.close();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> findByBTSalaryCriteria(Double min, Double max) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = builder.createQuery(Employee.class);
+
+        Root<Employee> root = criteria.from(Employee.class);
+        Predicate filter = builder.between(root.get("salary"), min, max);
+        criteria.select(root).where(filter);
+        List<Employee> employees = session.createQuery(criteria).list();
+
+        session.close();
+        return employees;
     }
 
     @Override

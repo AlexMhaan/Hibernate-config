@@ -92,18 +92,34 @@ public interface EmployeeDAO {
     List<Employee> findByAgeCriteria(Integer age);
 
     /**
+     * Busca todos los empleados greater than :age.
+     * @param age
+     * @return Employee List of Age greater than :age.
+     */
+    List<Employee> findByAgeGT(Integer age);
+
+    /**
+     * Busca todos los empleados greater than :age by Criteria.
+     * @param age
+     * @return Employee List greater than :age by Criteria.
+     */
+    List<Employee> findByAgeGTCriteria(Integer age);
+
+    /**
      * Busca todos los empleados por salario.
-     * @param salary
+     * @param min
+     * @param max
      * @return Employee List by Salary.
      */
-    List<Employee> findBySalary(Double salary);
+    List<Employee> findByBTSalary(Double min,Double max);
 
     /**
      * Busca todos los empleados por salario by Criteria.
-     * @param salary
+     * @param min
+     * @param max
      * @return Employee List by Salary by Criteria.
      */
-    List<Employee> findBySalaryCriteria(Double salary);
+    List<Employee> findByBTSalaryCriteria(Double min, Double max);
 
     /**
      * Busca todos los empleados por estado civil.
@@ -118,7 +134,6 @@ public interface EmployeeDAO {
      * @return Employee List by Married(0/1) by Criteria.
      */
     List<Employee> findByMarriageCriteria(Boolean married);
-
 
     /***
      * Crea un empleado insertandolo en la db de la correspondiente tabla.
