@@ -63,5 +63,11 @@ public class EmployeeCriteriaTest {
         System.out.println(employee);
     }
 
+    @Test
+    void findByMarriageCriteria() {
+        List<Employee> employee = dao.findByMarriageCriteria(false);
+        System.out.println(employee);
+    }
+
 
 }

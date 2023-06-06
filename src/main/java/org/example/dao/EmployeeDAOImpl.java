@@ -236,13 +236,32 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    public List<Employee> findByMarriage(Boolean married) {
-        return null;
+    public List<Employee> findByMarriage(Boolean isMarried) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String query = "from Employee where married = :isMarried";
+        List<Employee> employees = session.createQuery(query, Employee.class)
+                .setParameter(("isMarried"), isMarried)
+                .list();
+
+        session.close();
+        return employees;
     }
 
     @Override
-    public List<Employee> findByMarriageCriteria(Boolean married) {
-        return null;
+    public List<Employee> findByMarriageCriteria(Boolean isMarried) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = builder.createQuery(Employee.class);
+
+        Root<Employee> root = criteria.from(Employee.class);
+        Predicate filter = builder.equal(root.get("married"),isMarried);
+        criteria.select(root).where(filter);
+        List<Employee> employees = session.createQuery(criteria).list();
+
+        session.close();
+        return employees;
     }
 
     @Override

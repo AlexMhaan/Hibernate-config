@@ -58,9 +58,16 @@ class EmployeeCRUDTest {
         List<Employee> employee = dao.findByAgeGT(35);
         System.out.println(employee);
     }
+
     @Test
     void findByBTSalary() {
         List<Employee> employee = dao.findByBTSalary(55000.00, 88000.00);
+        System.out.println(employee);
+    }
+
+    @Test
+    void findByMarriage() {
+        List<Employee> employee = dao.findByMarriage(false);
         System.out.println(employee);
     }
 

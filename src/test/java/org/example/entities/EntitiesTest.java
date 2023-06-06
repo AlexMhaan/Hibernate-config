@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import org.example.dao.EmployeeDAO;
+import org.example.dao.EmployeeDAOImpl;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,5 +47,29 @@ public class EntitiesTest {
         session.close();
         sessionFactory.close();
         HibernateUtil.shutdown();
+    }
+
+    @Test
+    void nicksTest() {
+        Employee employee = new Employee(null,
+                                          "Employee con nick",
+                                          "Employee con nick",
+                                          "empleado@employee.com",
+                                          00,
+                                          00000.00,
+                                          false,
+                                          LocalDate.of(1999, 1, 1),
+                                          LocalDateTime.now()
+        );
+
+        employee.getNicks().add("nick1");
+        employee.getNicks().add("nick2");
+        employee.getNicks().add("nick3");
+
+        employee.setSeniority(EmployeeSeniority.ARCHITECT);
+
+        EmployeeDAO dao = new EmployeeDAOImpl();
+        dao.createEmployee(employee);
+
     }
 }

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Employee implements Serializable {
@@ -30,6 +32,12 @@ public class Employee implements Serializable {
     private LocalDate birthDate;
     @Column(name="creation_date")
     private LocalDateTime creationDate;
+
+    @ElementCollection
+    private List<String> nicks = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    EmployeeSeniority seniority;
 
     public Employee(){}
 
@@ -126,6 +134,14 @@ public class Employee implements Serializable {
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
+
+    public List<String> getNicks() { return nicks; }
+
+    public void setNicks(List<String> nicks) { this.nicks = nicks; }
+
+    public EmployeeSeniority getSeniority() { return seniority; }
+
+    public void setSeniority(EmployeeSeniority seniority) { this.seniority = seniority; }
 
     @Override
     public String toString() {
