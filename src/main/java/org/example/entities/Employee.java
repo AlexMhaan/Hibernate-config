@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "employees")
 public class Employee implements Serializable {
 
     @Id
@@ -32,6 +33,11 @@ public class Employee implements Serializable {
     private LocalDate birthDate;
     @Column(name="creation_date")
     private LocalDateTime creationDate;
+
+//    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="locations_pk", foreignKey=@ForeignKey(name = "fk_employees_locations"))
+    Location location;
 
     @ElementCollection
     private List<String> nicks = new ArrayList<>();
@@ -142,6 +148,14 @@ public class Employee implements Serializable {
     public EmployeeSeniority getSeniority() { return seniority; }
 
     public void setSeniority(EmployeeSeniority seniority) { this.seniority = seniority; }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     @Override
     public String toString() {

@@ -20,7 +20,12 @@ public class Car implements Serializable {
 
     public Car(){}
 
-    public Car(Long id, String manufacturer, Double cc, Integer releaseYear) {
+    public Car(
+            Long id,
+            String manufacturer,
+            Double cc,
+            Integer releaseYear
+    ) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.cc = cc;
