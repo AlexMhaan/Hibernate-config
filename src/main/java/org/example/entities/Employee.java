@@ -2,12 +2,16 @@ package org.example.entities;
 
 
 import jakarta.persistence.*;
+import org.example.util.BooleanToStringConverter;
+import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 @Entity
 @Table(name = "employees")
@@ -28,6 +32,9 @@ public class Employee implements Serializable {
 
     private Integer age;
     private Double salary;
+
+    @Column
+    @Convert(converter = BooleanToStringConverter.class)
     private Boolean married;
     @Column(name="birth_date")
     private LocalDate birthDate;
@@ -39,6 +46,8 @@ public class Employee implements Serializable {
     @JoinColumn(name="locations_pk", foreignKey=@ForeignKey(name = "fk_employees_locations"))
     Location location;
 
+    @OneToMany(cascade=CascadeType.ALL)
+    List<Car> car = new ArrayList<>();
     @ElementCollection
     private List<String> nicks = new ArrayList<>();
 
@@ -155,6 +164,14 @@ public class Employee implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public List<Car> getCars() {
+        return car;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.car = cars;
     }
 
     @Override

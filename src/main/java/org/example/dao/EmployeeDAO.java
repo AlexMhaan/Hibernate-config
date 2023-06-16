@@ -22,10 +22,17 @@ public interface EmployeeDAO {
 
     /**
      * Busca empleado por ID.
-     * @param Id
+     * @param id
      * @return Employee by ID.
      */
-    Employee findById(Long Id);
+    Employee findById(Long id);
+
+    /**
+     * Busca empleado por ID y sus relaciones, carga anticipada de datos eager loading(carga ansiosa).
+     * @param id
+     * @return Employee by ID.
+     */
+    Employee findByIdEager(Long id);
 
     /**
      * Busca empleado por ID by Criteria.

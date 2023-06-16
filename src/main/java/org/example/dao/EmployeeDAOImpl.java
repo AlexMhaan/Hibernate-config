@@ -50,6 +50,18 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    public Employee findByIdEager(Long id) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Employee> query = session.createQuery("select distinct e from Employee e join fetch e.car where e.id = :id", Employee.class);
+        query.setParameter("id", id);
+        Employee employee = query.getSingleResult();
+
+        session.close();
+        return employee;
+    }
+
+    @Override
     public Employee findByIdCriteria(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();

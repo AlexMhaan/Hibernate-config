@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "cars")
 public class Car implements Serializable {
 
     @Id
@@ -13,6 +14,8 @@ public class Car implements Serializable {
 
     private String manufacturer;
 
+    private String modelName;
+
     private Double cc;
 
     @Column(name = "release_year")
@@ -20,14 +23,15 @@ public class Car implements Serializable {
 
     public Car(){}
 
-    public Car(
-            Long id,
-            String manufacturer,
-            Double cc,
-            Integer releaseYear
+    public Car(Long id,
+               String manufacturer,
+               String modelName,
+               Double cc,
+               Integer releaseYear
     ) {
         this.id = id;
         this.manufacturer = manufacturer;
+        this.modelName = modelName;
         this.cc = cc;
         this.releaseYear = releaseYear;
     }
@@ -64,11 +68,20 @@ public class Car implements Serializable {
         this.releaseYear = releaseYear;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
                 ", manufacturer='" + manufacturer + '\'' +
+                ", modelName='" + modelName + '\'' +
                 ", cc=" + cc +
                 ", releaseYear=" + releaseYear +
                 '}';
