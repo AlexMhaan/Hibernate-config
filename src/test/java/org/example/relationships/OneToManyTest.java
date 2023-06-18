@@ -18,10 +18,9 @@ import java.util.List;
 public class OneToManyTest {
 
     @Test
-    @DisplayName("TEST-ASSOC: 1toN : Employee->Car")
+    @DisplayName("TEST-ASSOC: 1toN : Employee->Cars")
     void oneToOneAssociationTest() {
 
-        Location location = new Location(null, "Calle falsa A", "CP1Test", "Cordoba", "Argenturria");
 
         Employee employee = new Employee(null,
                                          "Employee to Location",
@@ -41,18 +40,16 @@ public class OneToManyTest {
         employee.getCars().add(car2);
         employee.getNicks().add("'Juance'");
         employee.setSeniority(EmployeeSeniority.JUNIOR);
-        employee.setLocation(location);
 
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-        LocationDAO locationDAO = new LocationDAOImpl();
 
-        locationDAO.createLocation(location);
         employeeDAO.createEmployee(employee);
 
         Employee employeeDB = employeeDAO.findByIdEager(5L);
         System.out.println(employeeDB);
         List<Car> cars = employeeDB.getCars();
         System.out.println(cars);
+
 
     }
 }

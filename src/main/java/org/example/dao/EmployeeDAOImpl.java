@@ -55,7 +55,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query<Employee> query = session.createQuery("select distinct e from Employee e join fetch e.car where e.id = :id", Employee.class);
         query.setParameter("id", id);
-        Employee employee = query.getSingleResult();
+        Employee employee = query.getSingleResultOrNull();
 
         session.close();
         return employee;
@@ -279,10 +279,10 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     @Override
     public Employee createEmployee(Employee employee) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.persist(employee);
+            session.save(employee);
             session.getTransaction().commit();
         }catch (PersistenceException e){
             e.printStackTrace();

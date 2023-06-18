@@ -25,6 +25,8 @@
         <mapping class="org.example.entities.Employee"/>
         <mapping class="org.example.entities.Car"/>
         <mapping class="org.example.entities.Location"/>
+        <mapping class="org.example.entities.Company"/>
+        <mapping class="org.example.entities.Project"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -71,6 +71,7 @@ public class EntitiesTest {
 
         EmployeeDAO dao = new EmployeeDAOImpl();
         dao.createEmployee(employee);
+        System.out.println(employee.getNicks());
 
     }
 }

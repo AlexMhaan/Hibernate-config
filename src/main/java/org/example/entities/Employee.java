@@ -3,7 +3,6 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 import org.example.util.BooleanToStringConverter;
-import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", length = 30, nullable = false)
+    @Column(name = "first_name", length = 35, nullable = false)
     private String firstName;
 
     @Column(name="last_name")
@@ -36,23 +35,29 @@ public class Employee implements Serializable {
     @Column
     @Convert(converter = BooleanToStringConverter.class)
     private Boolean married;
+
     @Column(name="birth_date")
     private LocalDate birthDate;
     @Column(name="creation_date")
     private LocalDateTime creationDate;
 
-//    @OneToOne(cascade=CascadeType.ALL)
-    @OneToOne
-    @JoinColumn(name="locations_pk", foreignKey=@ForeignKey(name = "fk_employees_locations"))
-    Location location;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    List<Car> car = new ArrayList<>();
     @ElementCollection
     private List<String> nicks = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     EmployeeSeniority seniority;
+    @OneToOne
+//    @JoinTable(name = "employees_locations")
+    Location location;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    List<Car> car = new ArrayList<>();
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    Company company;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    List<Project> projects = new ArrayList<>();
 
     public Employee(){}
 
@@ -170,8 +175,24 @@ public class Employee implements Serializable {
         return car;
     }
 
-    public void setCars(List<Car> cars) {
-        this.car = cars;
+    public void setCars(List<Car> car) {
+        this.car = car;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override

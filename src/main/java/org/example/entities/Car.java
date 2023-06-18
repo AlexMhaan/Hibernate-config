@@ -14,6 +14,7 @@ public class Car implements Serializable {
 
     private String manufacturer;
 
+    @Column(name = "model_name")
     private String modelName;
 
     private Double cc;

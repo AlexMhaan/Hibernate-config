@@ -90,15 +90,15 @@ Se pueden insertar nuevos datos desde Java utilizando los métodos de la interfa
 
     `@OneToOne` 
     
-    `@JoinColumn(name = "direction_pk",`
+    `@JoinColumn(name = "location_pk",`
     
-    `foreignKey = @ForeignKey(name = "fk_employee_direction"))` // permite cambiar el nombre de la columna y de la fk
+    `foreignKey = @ForeignKey(name = "fk_employee_location"))` // permite cambiar el nombre de la columna y de la fk
 
 2. Asociación con tabla
 
     `@OneToOne`
     
-    `@JoinTable(name = "ob_employee_direction",`
+    `@JoinTable(name = "employees_locations",`
     
     `joinColumns = @JoinColumn(name="employee_id"),`
     
