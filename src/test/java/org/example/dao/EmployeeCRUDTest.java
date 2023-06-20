@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.entities.Employee;
+import org.example.entities.EmployeeSeniority;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -71,7 +72,11 @@ class EmployeeCRUDTest {
         System.out.println(employee);
     }
 
-
+    @Test
+    void findBetweenAgeAndSeniority() {
+        List<Employee> employee = dao.findBetweenAgeAndSeniority(20, 38, EmployeeSeniority.TRAINEE);
+        System.out.println(employee);
+    }
 
     @Test
     void createEmployee() {

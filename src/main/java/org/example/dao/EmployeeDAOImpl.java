@@ -6,6 +6,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.example.entities.Employee;
+import org.example.entities.EmployeeSeniority;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -139,9 +140,9 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     public Employee findByEmail(String email) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String query = "from Employee where email like :email";
+        String query = "from Employee where email = :email";
         Employee employee = session.createQuery(query, Employee.class)
-                .setParameter(("email"), "%" + email + "%")
+                .setParameter(("email"), email)
                 .getSingleResult();
 
         session.close();
@@ -270,6 +271,41 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         Root<Employee> root = criteria.from(Employee.class);
         Predicate filter = builder.equal(root.get("married"),isMarried);
         criteria.select(root).where(filter);
+        List<Employee> employees = session.createQuery(criteria).list();
+
+        session.close();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> findBetweenAgeAndSeniority(Integer minAge, Integer maxAge, EmployeeSeniority seniority) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        String query = "FROM Employee WHERE seniority = :seniority AND age BETWEEN :minAge AND :maxAge";
+        List<Employee> employees = session.createQuery(query, Employee.class)
+                .setParameter(("seniority"), seniority)
+                .setParameter("minAge", minAge)
+                .setParameter("maxAge", maxAge)
+                .list();
+
+        session.close();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> findBetweenAgeAndSeniorityByCriteria(Integer minAge, Integer maxAge, EmployeeSeniority seniority) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = builder.createQuery(Employee.class);
+
+        Root<Employee> root = criteria.from(Employee.class);
+        Predicate filterByAge = builder.between(root.get("age"),minAge, maxAge);
+        Predicate filterByCategory = builder.equal(root.get("seniority"),seniority);
+        Predicate filterFilter = builder.and(filterByAge, filterByCategory);
+//                               builder.or(filterByAge, filterByCategory);
+        criteria.select(root).where(filterFilter);
         List<Employee> employees = session.createQuery(criteria).list();
 
         session.close();

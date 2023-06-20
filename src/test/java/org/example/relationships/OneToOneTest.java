@@ -46,6 +46,7 @@ public class OneToOneTest {
 
 //        System.out.println(employee.getLocation());
         System.out.println(employee.getNicks());
+        System.out.println(employee.getSeniority());
 
     }
 }

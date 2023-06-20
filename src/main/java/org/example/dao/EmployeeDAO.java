@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.entities.Employee;
+import org.example.entities.EmployeeSeniority;
 
 import java.util.List;
 
@@ -141,6 +142,25 @@ public interface EmployeeDAO {
      * @return Employee List by Married(0/1) by Criteria.
      */
     List<Employee> findByMarriageCriteria(Boolean married);
+
+    /**
+     * Busca entre min-max edad y categoria.
+     * @param minAge
+     * @param maxAge
+     * @param seniority
+     * @return Employee List filtered by Criteria.
+     */
+    List<Employee> findBetweenAgeAndSeniority(Integer minAge, Integer maxAge, EmployeeSeniority seniority);
+
+    /**
+     * Busca entre min-max edad y categoria by Criteria.
+     * @param minAge
+     * @param maxAge
+     * @param seniority
+     * @return Employee List filtered by Criteria.
+     */
+    List<Employee> findBetweenAgeAndSeniorityByCriteria(Integer minAge, Integer maxAge, EmployeeSeniority seniority);
+
 
     /***
      * Crea un empleado insertandolo en la db de la correspondiente tabla.

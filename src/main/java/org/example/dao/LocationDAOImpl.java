@@ -69,7 +69,7 @@ public class LocationDAOImpl implements LocationDAO{
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            session.persist(location);
+            session.save(location);
             session.getTransaction().commit();
         }catch (PersistenceException e){
             e.printStackTrace();
