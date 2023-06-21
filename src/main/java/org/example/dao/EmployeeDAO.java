@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.dto.EmployeeDTO;
 import org.example.entities.Employee;
 import org.example.entities.EmployeeSeniority;
 
@@ -34,6 +35,13 @@ public interface EmployeeDAO {
      * @return Employee by ID.
      */
     Employee findByIdEager(Long id);
+
+    /**
+     * Busca empleado por ID query nativa*.
+     * @param id
+     * @return Employee by ID Native.
+     */
+//    EmployeeDTO findByIdNative(Long id);
 
     /**
      * Busca empleado por ID by Criteria.
@@ -160,6 +168,13 @@ public interface EmployeeDAO {
      * @return Employee List filtered by Criteria.
      */
     List<Employee> findBetweenAgeAndSeniorityByCriteria(Integer minAge, Integer maxAge, EmployeeSeniority seniority);
+
+    /**
+     * Calcula la media de edad de los empleados by Criteria.
+     * @param
+     * @return
+     */
+    Integer findAvgAgeCriteria();
 
 
     /***

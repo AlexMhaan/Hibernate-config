@@ -30,6 +30,7 @@ public class Employee implements Serializable {
     private String email;
 
     private Integer age;
+
     private Double salary;
 
     @Column

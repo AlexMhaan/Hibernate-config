@@ -1,7 +1,7 @@
 INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Anita','Laprida','empleado1@employee.com',25,'1988-12-12',58000.00,"true",'1988-12-12 18:18', 'MID_LEVEL');
 INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Debora','Ramirez','empleado2@employee.com',32,'1988-12-12',50000.00,"false",'1988-12-12 20:18', 'PRINCIPAL_LEAD');
 INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Juan','Ramirez','empleado3@employee.com',30,'1988-12-12',110000.00,"true",'1988-12-12 20:18', 'TRAINEE');
-INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Marian','Urr','empleado4@employee.com',32,'1988-12-12',88000.00,"false",'1988-12-12 20:18', 'SENIOR');
+INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Marian','Urr','empleado4@employee.com',40,'1988-12-12',88000.00,"false",'1988-12-12 20:18', 'SENIOR');
 INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Laura','Dominguez','empleado5@employee.com',53,'1988-12-12',50000.00,"false",'1988-12-12 20:18', 'ARCHITECT');
 INSERT INTO employees (first_name,last_name,email,age,birth_date,salary,married,creation_date, seniority) VALUES ('Pedro','Lopez','empleado6@employee.com',20,'1988-12-12',80000.00,"false",'1988-12-12 20:18', 'PRINCIPAL_LEAD');
 

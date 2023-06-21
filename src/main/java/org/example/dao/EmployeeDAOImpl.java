@@ -1,14 +1,13 @@
 package org.example.dao;
 
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
+import org.example.dto.EmployeeDTO;
 import org.example.entities.Employee;
 import org.example.entities.EmployeeSeniority;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -61,6 +60,19 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         session.close();
         return employee;
     }
+
+//    @Override
+//    public EmployeeDTO findByIdNative(Long id) {
+//
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        NativeQuery<EmployeeDTO> query = session.createNativeQuery("SELECT id, email FROM Employee WHERE id = :id", EmployeeDTO.class);
+//        query.setParameter("id", id);
+//
+//        EmployeeDTO employee = query.getSingleResultOrNull();
+//
+//        session.close();
+//        return employee;
+//    }
 
     @Override
     public Employee findByIdCriteria(Long id) {
@@ -310,6 +322,22 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
         session.close();
         return employees;
+    }
+
+    @Override
+    public Integer findAvgAgeCriteria() {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+
+        Root<Employee> root = criteria.from(Employee.class);
+
+        Expression<Double> avg = builder.avg(root.get("age"));
+        criteria.select(avg);
+
+        Double averAge = session.createQuery(criteria).getSingleResultOrNull();
+        return (int)(Math.round(averAge));
     }
 
     @Override

@@ -76,4 +76,10 @@ public class EmployeeCriteriaTest {
         System.out.println(employees);
 
     }
+
+    @Test
+    void findAvgAgeCriteria() {
+        Integer averAge = dao.findAvgAgeCriteria();
+        System.out.println(averAge);
+    }
 }
