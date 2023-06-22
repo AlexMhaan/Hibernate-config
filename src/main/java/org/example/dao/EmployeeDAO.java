@@ -23,6 +23,13 @@ public interface EmployeeDAO {
     List<Employee> findAllCriteria();
 
     /**
+     * Devuelve una lista de todos los empleados.
+     * Native query
+     * @return Employee List.
+     */
+    List<Employee> findAllNative();
+
+    /**
      * Busca empleado por ID.
      * @param id
      * @return Employee by ID.
@@ -37,18 +44,21 @@ public interface EmployeeDAO {
     Employee findByIdEager(Long id);
 
     /**
-     * Busca empleado por ID query nativa*.
-     * @param id
-     * @return Employee by ID Native.
-     */
-//    EmployeeDTO findByIdNative(Long id);
-
-    /**
      * Busca empleado por ID by Criteria.
      * @param id
      * @return Employee by ID Criteria.
      */
     Employee findByIdCriteria(Long id);
+
+    /**
+     * Busca empleado por ID query nativa*.
+     *
+     * @param id
+     * @return Employee by ID Native.
+     */
+    Object[] findByIdNative(Long id);
+
+    List<EmployeeDTO> findByIdProjection();
 
     /**
      * Busca todos los empleados por nombre.

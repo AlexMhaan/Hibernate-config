@@ -9,77 +9,77 @@ import java.util.List;
 
 public class EmployeeCriteriaTest {
 
-    EmployeeDAO dao;
+    EmployeeDAO employeeDAO;
 
     @BeforeEach
     void setUp() {
-        dao = new EmployeeDAOImpl();
+        employeeDAO = new EmployeeDAOImpl();
     }
 
     @Test
     void findAllCriteria() {
-        List<Employee> employees = dao.findAllCriteria();
+        List<Employee> employees = employeeDAO.findAllCriteria();
         System.out.println(employees);
     }
 
     @Test
     void findByIdCriteria() {
-        Employee employee = dao.findByIdCriteria(2L);
+        Employee employee = employeeDAO.findByIdCriteria(2L);
         System.out.println(employee);
     }
 
     @Test
     void findByFirstNameCriteria() {
-        List<Employee> employee = dao.findByFirstNameCriteria("e");
+        List<Employee> employee = employeeDAO.findByFirstNameCriteria("e");
         System.out.println(employee);
     }
 
     @Test
     void findByLastNameCriteria() {
-        List<Employee> employee = dao.findByLastNameCriteria("la");
+        List<Employee> employee = employeeDAO.findByLastNameCriteria("la");
         System.out.println(employee);
     }
 
     @Test
     void findByEmailCriteria() {
-        Employee employee = dao.findByEmailCriteria("empleado2@employee.com");
+        Employee employee = employeeDAO.findByEmailCriteria("empleado2@employee.com");
         System.out.println(employee);
     }
 
     @Test
     void findByAgeCriteria() {
-        List<Employee> employee = dao.findByAgeCriteria(35);
+        List<Employee> employee = employeeDAO.findByAgeCriteria(35);
         System.out.println(employee);
     }
 
     @Test
     void findByAgeGTCriteria() {
-        List<Employee> employee = dao.findByAgeGTCriteria(36);
+        List<Employee> employee = employeeDAO.findByAgeGTCriteria(36);
         System.out.println(employee);
     }
 
     @Test
     void findByBTSalaryCriteria() {
-        List<Employee> employee = dao.findByBTSalaryCriteria(55000.00, 88000.00);
+        List<Employee> employee = employeeDAO.findByBTSalaryCriteria(55000.00, 88000.00);
         System.out.println(employee);
     }
 
     @Test
     void findByMarriageCriteria() {
-        List<Employee> employee = dao.findByMarriageCriteria(false);
+        List<Employee> employee = employeeDAO.findByMarriageCriteria(false);
         System.out.println(employee);
     }
 
     @Test
     void findBetweenAgeAndSeniorityByCriteria() {
-        List<Employee> employees = dao.findBetweenAgeAndSeniorityByCriteria(20, 38, EmployeeSeniority.TRAINEE);
+        List<Employee> employees = employeeDAO.findBetweenAgeAndSeniorityByCriteria(20, 38, EmployeeSeniority.TRAINEE);
         System.out.println(employees);
 
     }
 
     @Test
     void findAvgAgeCriteria() {
-        Integer averAge = dao.findAvgAgeCriteria();
+        Integer averAge = employeeDAO.findAvgAgeCriteria();
         System.out.println(averAge);
     }
 }

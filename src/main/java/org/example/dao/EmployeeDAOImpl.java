@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO{
@@ -40,6 +42,19 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    public List<Employee> findAllNative() {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        NativeQuery<Employee> query = session.createNativeQuery("SELECT * FROM db_hibernate.employees", Employee.class);
+
+        List<Employee> employee = query.list();
+
+        session.close();
+        return employee;
+
+    }
+
+    @Override
     public Employee findById(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -53,7 +68,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     public Employee findByIdEager(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query<Employee> query = session.createQuery("select distinct e from Employee e join fetch e.car where e.id = :id", Employee.class);
+        Query<Employee> query = session.createQuery("SELECT distinct e FROM Employee e JOIN FETCH e.car WHERE e.id = :id", Employee.class);
         query.setParameter("id", id);
         Employee employee = query.getSingleResultOrNull();
 
@@ -61,18 +76,36 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         return employee;
     }
 
-//    @Override
-//    public EmployeeDTO findByIdNative(Long id) {
-//
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        NativeQuery<EmployeeDTO> query = session.createNativeQuery("SELECT id, email FROM Employee WHERE id = :id", EmployeeDTO.class);
-//        query.setParameter("id", id);
-//
-//        EmployeeDTO employee = query.getSingleResultOrNull();
-//
-//        session.close();
-//        return employee;
-//    }
+    @Override
+    public Object[] findByIdNative(Long id) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        NativeQuery query = session.createNativeQuery("SELECT id, email FROM db_hibernate.employees WHERE id = :id");
+        query.setParameter("id", id);
+
+
+        Object[] employee = (Object[]) query.uniqueResult();
+
+        session.close();
+        return employee;
+    }
+
+    @Override
+    public List<EmployeeDTO> findByIdProjection() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        List<Object[]> employees = session.createNativeQuery("SELECT id, email FROM db_hibernate.employees").list();
+        for (Object[] employee : employees) {
+            Long id = ((Long) employee[0]);
+            String email = ((String) employee[1]);
+            employeeDTOS.add(new EmployeeDTO(id, email));
+
+        }
+
+        session.close();
+        return employeeDTOS;
+    }
 
     @Override
     public Employee findByIdCriteria(Long id) {
