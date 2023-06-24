@@ -10,7 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +54,24 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    public List<EmployeeDTO> findAllProjection() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        List<Object[]> employees = session.createNativeQuery("SELECT id, email, salary FROM db_hibernate.employees").list();
+        for (Object[] employee : employees) {
+            Long id = ((Long) employee[0]);
+            String email = ((String) employee[1]);
+            Double salary = ((Double) employee[2]);
+
+            employeeDTOS.add(new EmployeeDTO(id, email, salary));
+        }
+
+        session.close();
+        return employeeDTOS;
+    }
+
+    @Override
     public Employee findById(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -80,7 +97,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     public Object[] findByIdNative(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        NativeQuery query = session.createNativeQuery("SELECT id, email FROM db_hibernate.employees WHERE id = :id");
+        NativeQuery query = session.createNativeQuery("SELECT * FROM db_hibernate.employees WHERE id = :id");
         query.setParameter("id", id);
 
 
@@ -90,22 +107,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         return employee;
     }
 
-    @Override
-    public List<EmployeeDTO> findByIdProjection() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
-        List<Object[]> employees = session.createNativeQuery("SELECT id, email FROM db_hibernate.employees").list();
-        for (Object[] employee : employees) {
-            Long id = ((Long) employee[0]);
-            String email = ((String) employee[1]);
-            employeeDTOS.add(new EmployeeDTO(id, email));
-
-        }
-
-        session.close();
-        return employeeDTOS;
-    }
 
     @Override
     public Employee findByIdCriteria(Long id) {

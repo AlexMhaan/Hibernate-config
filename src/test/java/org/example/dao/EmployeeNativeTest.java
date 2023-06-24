@@ -32,7 +32,7 @@ public class EmployeeNativeTest {
 
     @Test
     void findByIdProjection() {
-        List<EmployeeDTO> employees = employeeDAO.findByIdProjection();
+        List<EmployeeDTO> employees = employeeDAO.findAllProjection();
         System.out.println(employees);
     }
 }

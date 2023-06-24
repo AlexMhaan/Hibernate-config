@@ -1,6 +1,5 @@
 package org.example.dto;
 
-
 import jakarta.persistence.Transient;
 
 public class EmployeeDTO {
@@ -11,11 +10,19 @@ public class EmployeeDTO {
     @Transient
     private String email;
 
+    @Transient
+    private Double salary;
+
     public EmployeeDTO(){}
 
-    public EmployeeDTO(Long id, String email) {
+    public EmployeeDTO(
+            Long id,
+            String email,
+            Double salary
+    ) {
         this.id = id;
         this.email = email;
+        this.salary = salary;
     }
 
     public Long getId() {
@@ -34,11 +41,20 @@ public class EmployeeDTO {
         this.email = email;
     }
 
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
         return "EmployeeDTO{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
+                ", salary=" + salary + '\n' +
                 '}';
     }
 }

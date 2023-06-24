@@ -58,7 +58,7 @@ public interface EmployeeDAO {
      */
     Object[] findByIdNative(Long id);
 
-    List<EmployeeDTO> findByIdProjection();
+    List<EmployeeDTO> findAllProjection();
 
     /**
      * Busca todos los empleados por nombre.
