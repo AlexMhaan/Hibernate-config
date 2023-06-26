@@ -35,4 +35,10 @@ public class EmployeeNativeTest {
         List<EmployeeDTO> employees = employeeDAO.findAllProjection();
         System.out.println(employees);
     }
+
+    @Test
+    void count() {
+        Long employeeCount = employeeDAO.count();
+        System.out.println("Total de empleados: " + employeeCount);
+    }
 }

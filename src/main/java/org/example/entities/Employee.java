@@ -14,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "employees")
+@NamedQuery(name = "Employee.higherSalary", query = "FROM Employee e WHERE e.salary > 90000.0")
 public class Employee implements Serializable {
 
     @Id
@@ -42,6 +43,9 @@ public class Employee implements Serializable {
     @Column(name="creation_date")
     private LocalDateTime creationDate;
 
+    @Column(name="update_time")
+    private LocalDateTime updateTime;
+
     @ElementCollection
     private List<String> nicks = new ArrayList<>();
 
@@ -61,6 +65,26 @@ public class Employee implements Serializable {
     List<Project> projects = new ArrayList<>();
 
     public Employee(){}
+
+    public Employee(
+            Long id,
+            String firstName,
+            String lastName,
+            String email,
+            Integer age,
+            Double salary,
+            Boolean married,
+            LocalDate birthDate
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.salary = salary;
+        this.married = married;
+        this.birthDate = birthDate;
+    }
 
     public Employee(
             Long id,
@@ -196,6 +220,14 @@ public class Employee implements Serializable {
         this.projects = projects;
     }
 
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -210,4 +242,24 @@ public class Employee implements Serializable {
                 ", creationDate=" + creationDate + '\n' +
                 '}';
     }
+
+    @PrePersist
+    public void prePersist() {
+        System.out.println("PRE-PERSIST");
+        this.setCreationDate(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        System.out.println("PRE-UPDATE");
+        this.setUpdateTime(LocalDateTime.now());
+
+    }
+
+    @PreRemove
+    public void preRemove() {
+        System.out.println("PRE-REMOVE");
+
+    }
+
 }

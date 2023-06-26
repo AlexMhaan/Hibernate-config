@@ -72,6 +72,25 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    public List<Employee> findHigherSalary() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Employee> employees = session.createNamedQuery("Employee.higherSalary", Employee.class).list();
+
+        session.close();
+        return employees;
+    }
+
+
+    public Long count() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Long employeeCount = (Long) session.createQuery("SELECT count(e) FROM Employee e").getSingleResult();
+
+        session.close();
+        return employeeCount;
+    }
+
+    @Override
     public Employee findById(Long id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();

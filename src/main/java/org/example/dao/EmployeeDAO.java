@@ -60,6 +60,14 @@ public interface EmployeeDAO {
 
     List<EmployeeDTO> findAllProjection();
 
+    List<Employee> findHigherSalary();
+
+    /**
+     * Devuelve el total de empleados en DB.
+     * @return Count num.
+     */
+    Long count();
+
     /**
      * Busca todos los empleados por nombre.
      * @param firstName
