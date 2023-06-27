@@ -37,7 +37,11 @@
       <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
-
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-envers</artifactId>
+          <version>6.1.7.Final</version>
+      </dependency>
 
 
   </dependencies>

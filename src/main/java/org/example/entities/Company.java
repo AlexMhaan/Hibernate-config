@@ -1,12 +1,16 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Audited
 public class Company implements Serializable {
 
     @Id
@@ -25,6 +29,10 @@ public class Company implements Serializable {
 
     @OneToMany(mappedBy = "company")
     List<Employee> employees = new ArrayList<>();
+
+    @Column(name = "created_on")
+    @CreationTimestamp
+    LocalDateTime createdOn;
 
     public Company(){}
 
@@ -88,6 +96,14 @@ public class Company implements Serializable {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     @Override

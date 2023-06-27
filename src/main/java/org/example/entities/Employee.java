@@ -3,6 +3,9 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 import org.example.util.BooleanToStringConverter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,7 +18,10 @@ import java.util.List;
 @Entity
 @Table(name = "employees")
 @NamedQuery(name = "Employee.higherSalary", query = "FROM Employee e WHERE e.salary > 90000.0")
+//@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+//@Audited
 public class Employee implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,6 +38,7 @@ public class Employee implements Serializable {
 
     private Integer age;
 
+    @Audited
     private Double salary;
 
     @Column
@@ -55,7 +62,8 @@ public class Employee implements Serializable {
 //    @JoinTable(name = "employees_locations")
     Location location;
 
-    @OneToMany(cascade=CascadeType.ALL)
+//    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany
     List<Car> car = new ArrayList<>();
 
     @ManyToOne(cascade=CascadeType.ALL)
@@ -63,6 +71,10 @@ public class Employee implements Serializable {
 
     @ManyToMany(cascade=CascadeType.ALL)
     List<Project> projects = new ArrayList<>();
+
+    @Column(name = "created_on")
+    @CreationTimestamp
+    LocalDateTime createdOn;
 
     public Employee(){}
 
@@ -226,6 +238,14 @@ public class Employee implements Serializable {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     @Override

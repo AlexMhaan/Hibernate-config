@@ -1,11 +1,15 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cars")
+@Audited
 public class Car implements Serializable {
 
     @Id
@@ -21,6 +25,13 @@ public class Car implements Serializable {
 
     @Column(name = "release_year")
     private Integer releaseYear;
+
+    @ManyToOne
+    Employee employee;
+
+    @Column(name = "created_on")
+    @CreationTimestamp
+    LocalDateTime createdOn;
 
     public Car(){}
 
@@ -75,6 +86,22 @@ public class Car implements Serializable {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     @Override

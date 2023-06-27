@@ -1,14 +1,18 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "proyects")
+@Audited
 public class Project implements Serializable {
 
     @Id
@@ -22,6 +26,10 @@ public class Project implements Serializable {
 
     @ManyToMany(mappedBy = "projects")
     List<Employee> employees = new ArrayList<>();
+
+    @Column(name = "created_on")
+    @CreationTimestamp
+    LocalDateTime createdOn;
     public Project() {}
 
     public Project(Long id, String projectName, LocalDate startDate) {
@@ -52,6 +60,14 @@ public class Project implements Serializable {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     @Override
